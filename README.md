@@ -7,21 +7,51 @@
 ## Install
 
 ```bash
-npm install --save react-promise-hooks
+npm i react-promise-hooks
 ```
 
 ## Usage
 
+#### usePromise()
+
+- Invoked on render of component
+
 ```tsx
-import React, { Component } from 'react'
+const { data, error, loading, refetch } = usePromise(PromiseFunction)
+```
 
-import MyComponent from 'react-promise-hooks'
-import 'react-promise-hooks/dist/index.css'
+#### useLazyPromise()
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+- Invoked when promiseRequest function is called
+
+```tsx
+const [promiseRequest, { data, error, loading, done }] = useLazyPromise(PromiseRequest)
+```
+
+#### Example Component
+
+```tsx
+const PromiseRequest = () => {
+  return fetch('https://jsonplaceholder.typicode.com/todos/1').then((response) => response.json())
+}
+
+const App = () => {
+  const { data, error, loading } = usePromise(PromiseRequest)
+  const [promiseRequest, results] = useLazyPromise(PromiseRequest)
+
+  return (
+    <div>
+      <h3>usePromise()</h3>
+      <p>
+        {JSON.stringify(data)} {error.occurred} {loading}
+      </p>
+      <h3>useLazyPromise()</h3>
+      <p>
+        {JSON.stringify(results.data)} {error.occurred} {loading}
+      </p>
+      <button onClick={promiseRequest}>Invoke Lazy Promise</button>
+    </div>
+  )
 }
 ```
 
