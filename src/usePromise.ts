@@ -3,7 +3,7 @@ import { RequestError, defaultError } from './types'
 
 const defaultParam: any = null
 
-export const usePromise = <T, P>(request: (params: P) => Promise<T>, params: P = defaultParam) => {
+export const usePromise = <T, P = any>(request: (params: P) => Promise<T>, params: P = defaultParam) => {
   const [data, setData] = React.useState<T>()
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<RequestError>(defaultError)
