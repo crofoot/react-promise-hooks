@@ -1,9 +1,9 @@
 import React from 'react'
 import { RequestError, defaultError } from './types'
 
-type UseLazyPromise<P, T> = [(params: P) => Promise<any>, { loading: boolean; done: boolean; error: RequestError; data: T | null }]
+type UseLazyPromise<T, P> = [(params: P) => Promise<any>, { loading: boolean; done: boolean; error: RequestError; data: T | null }]
 
-export const useLazyPromise = <P, T>(request: (data: P) => Promise<T>): UseLazyPromise<P, T> => {
+export const useLazyPromise = <T, P>(request: (data: P) => Promise<T>): UseLazyPromise<T, P> => {
   const [done, setDone] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [data, setData] = React.useState<T | null>(null)

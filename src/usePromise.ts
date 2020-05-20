@@ -1,19 +1,19 @@
 import React from 'react'
 import { RequestError, defaultError } from './types'
 
-export const usePromise = <T extends any>(request: () => Promise<any>) => {
+export const usePromise = <T, P>(request: (params: P) => Promise<T>, params: P) => {
   const [data, setData] = React.useState<T>()
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<RequestError>(defaultError)
 
-  const refetch = () => {
+  const refetch = (promiseParams: P) => {
     setLoading(true)
     setError(defaultError)
-    return handleRequest()
+    return handlePromise(promiseParams)
   }
 
-  const handleRequest = () => {
-    return request()
+  const handlePromise = (promiseParams: P) => {
+    return request(promiseParams)
       .then((requestData) => {
         setData(requestData)
       })
@@ -29,7 +29,7 @@ export const usePromise = <T extends any>(request: () => Promise<any>) => {
   }
 
   React.useEffect(() => {
-    handleRequest()
+    handlePromise(params)
   }, [])
 
   return { loading, error, data, refetch }
