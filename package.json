@@ -1,6 +1,6 @@
 {
   "name": "react-promise-hooks",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Lightweight hook package to handle promises",
   "author": "crofoot",
   "license": "MIT",
