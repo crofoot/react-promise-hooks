@@ -19,7 +19,7 @@ npm i react-promise-hooks
 ```tsx
 const { data, error, loading, refetch } = usePromise(PromiseFunction)
 // or if you're using typescript
-const [promiseRequest, { data, error, loading, done }] = usePromise<ReturnType>(PromiseRequest)
+const [promiseRequest, { data, error, loading, done }] = usePromise<ReturnType, ParamType>(PromiseRequest)
 ```
 
 #### useLazyPromise()
@@ -29,7 +29,7 @@ const [promiseRequest, { data, error, loading, done }] = usePromise<ReturnType>(
 ```tsx
 const [promiseRequest, { data, error, loading, done }] = useLazyPromise(PromiseRequest)
 // or if you're using typescript
-const [promiseRequest, { data, error, loading, done }] = useLazyPromise<ParamType, ReturnType>(PromiseRequest)
+const [promiseRequest, { data, error, loading, done }] = useLazyPromise<ReturnType, ParamType>(PromiseRequest)
 ```
 
 #### Example Component
